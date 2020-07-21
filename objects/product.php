@@ -111,6 +111,30 @@ class Product{
 
 
     }
+
+    public function update(){
+
+        
+
+        $query = "UPDATE ". $this->table_name . "SET name = :name, price = :price, description = :description, category_id = :category_id WHERE id = :id";
+        
+        $stmt = $this->conn->prepare($query);
+
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->price=htmlspecialchars(strip_tags($this->price));
+        $this->description=htmlspecialchars(strip_tags($this->description));
+        $this->category_id=htmlspecialchars(strip_tags($this->category_id));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+        if($stmt->execute()){
+            
+            return True;
+
+        }
+
+        return false;
+        
+    }
     
 }
 
